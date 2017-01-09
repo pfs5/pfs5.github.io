@@ -1,0 +1,175 @@
+body {
+  font-family: 'Work Sans', sans-serif;
+}
+#splash {
+  color: #fff;
+  background: url("splash-bg.jpg");
+  background-size: cover;
+}
+#splash {
+  padding-top: 50px;
+}
+#splash .top-bar, #splash .top-bar ul {
+  background: none;
+}
+#splash .top-bar a {
+  color: #fff;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+#splash .wrap {
+  margin-top: 100px;
+}
+#splash .branding {
+  padding-top: 50px
+}
+#splash h1 {
+  font-family: 'Work Sans', sans-serif;
+}
+#splash iframe {
+  max-width: 100%;
+  float: right;
+}
+.fullscreen {
+  min-height: 100vh;
+}
+#info {
+  padding-top: 150px;
+}
+#info .top {
+  margin-bottom: 50px;
+}
+#info h3 {
+  text-transform: uppercase;
+  font-size: 13px;
+  font-weight: bold;
+}
+#info .top h2 {
+  font-size: 28px;
+}
+#development {
+  background: url("challenge-bg.jpg");
+  background-size: cover;
+  color: #fff;
+  padding-top: 150px;
+}
+#development h3 {
+  text-transform: uppercase;
+  font-size: 13px;
+  font-weight: bold;
+}
+#development h2 {
+  font-size: 28px;
+}
+#development .ff {
+  margin-top: 20px;
+  color: #999;
+}
+#method {
+  padding-top: 100px;
+}
+#method .heading {
+  margin-bottom: 50px;
+}
+#method h3 {
+  text-transform: uppercase;
+  font-size: 13px;
+  font-weight: bold;
+}
+#method h2 {
+  font-size: 28px;
+}
+#method .imgframe {
+    height: 200px;      /* equals max image height */
+    width: 100%;
+    white-space: nowrap;
+
+    text-align: center; margin: 1em 0;
+}
+#method .imgframe:before, .imgframe_before {
+    content: "";
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+}
+#method .imgframe img {
+    background: #3A6F9A;
+    vertical-align: middle;
+    max-height: 200px;
+}
+#media {
+  background: #333;
+  padding-top: 100px;
+}
+#media .heading {
+  margin-bottom: 20px;
+}
+#conclusions {
+  background: #f4f5f6;
+  padding-top: 100px;
+}
+#conclusions .heading {
+  margin-bottom: 20px;
+}
+.front-slider {
+  padding-top: 80px;
+}
+#conclusions h3 {
+  text-transform: uppercase;
+  font-size: 13px;
+  font-weight: bold;
+}
+#conclusions h2 {
+  font-size: 28px;
+}
+#footer {
+  padding: 100px 0px;
+  color: #fff;
+  background: #262f36;
+}
+#footer h3 {
+  text-transform: uppercase;
+  font-size: 13px;
+  font-weight: bold;
+}
+#footer .team-wrap {
+  margin-bottom: 50px;
+  text-align: center;
+}
+
+@media screen and (max-width: 40em) {
+  #splash .wrap {
+    margin-top: 30px;
+  }
+  #splash {
+    padding-top: 10px;
+  }
+  #splash .branding {
+    padding-top: 0px;
+    margin-bottom: 20px;
+  }
+  #info {
+    padding-top: 20px;
+  }
+  #info .top {
+    margin-bottom: 50px;
+  }
+  #info .info-pic {
+    margin-bottom: 30px;
+  }
+  #development {
+    padding-top: 50px;
+  }
+  #method {
+    padding-top: 20px;
+  }
+  #method .heading {
+    margin-bottom: 50px;
+  }
+  #conclusions {
+    padding-top: 20px;
+  }
+  .front-slider {
+    padding-top: 0;
+  }
+}

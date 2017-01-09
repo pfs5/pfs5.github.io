@@ -1,193 +1,223 @@
 <!doctype html>
-<html>
-<head>
+<html class="no-js" lang="en" dir="ltr">
+  <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, maximum-scale=1">
-
-    <title>ParADE</title>
-    
-    <link rel="stylesheet" type="text/css" href="/style.css">
-</head>
-<body>
-    <p id="Label">Connecting...</p>
-    <div id="element">No input.</div>
-    <div id="output"></div>
-    
-    <div class="overlay" id="back">
-        <div id="key" class="invisible">
-            <div id="btn1"></div>
-            <div id="btn2"></div>
-            <div id="btn3"></div>
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PlanBLOCKS</title>
+    <meta name="description" content="The village is under attack. It is your viking duty to save it">
+    <meta property="og:image" content="https://palmroos-kth.github.io/AGI16-web/front-slider/slider1.jpg">
+    <link rel="stylesheet" href="css/foundation.css">
+    <link rel="stylesheet" href="css/app.css">
+    <link href="https://fonts.googleapis.com/css?family=Work+Sans:400,500" rel="stylesheet">
+  </head>
+  <body>
+    <div id="splash" class="fullscreen">
+      <div class="row">
+        <div class="top-bar show-for-medium">
+          <div class="top-bar-right">
+            <ul class="menu" data-magellan data-bar-offset="-25">
+              <li><a href="#info">Info</a></li>
+              <li><a href="#development">Challenges</a></li>
+              <li><a href="#method">Method</a></li>
+              <li><a href="#media">Media</a></li>
+              <li><a href="#conclusions">Conclusions</a></li>
+            </ul>
+          </div>
         </div>
+        <div class="wrap">
+          <div class="branding medium-4 columns">
+            <h1>Plan BLOCKS</h1>
+            <p>The village is under attack. It is your viking duty to save it</p>
+            <div data-magellan data-bar-offset="-25">
+            <a href="#info" class="button">Read More</a>
+            </div>
+          </div>
+          <div class="video medium-8 columns">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/GM3a7PXKRz4" frameborder="0" allowfullscreen></iframe>
+          </div>
+        </div>
+      </div>
     </div>
-    
-    <!--<script src="js/gyro.min.js"></script>-->
-    <script src="js/gyro.edited.js"></script>
-    <script src="js/connection.js"></script>
-    <script src="js/hammer.min.js"></script>
-    <script src="js/jquery-3.1.1.slim.min.js"></script>
-    <script type="text/javascript">
-        var CON_ADDRESS = window.location.hostname;
-        var CON_PORT = '9090';
-        var SENSOR_FREQ = 50;   //50
-        var TIMEOUT = null;     //30000;
-        var ENABLE_VIBRATE = false;
-        var LABEL = document.getElementById('Label');
-        
-        if(ENABLE_VIBRATE)
-            navigator.vibrate = navigator.vibrate || navigator.webkitVibrate || navigator.mozVibrate || navigator.msVibrate;
-        
-        //document.documentElement.requestFullscreen();
-        
-        con.init(CON_ADDRESS, CON_PORT);
-        
-        con.onOpenCallback = function() 
-        {
-            LABEL.innerHTML = 'Connected successfully.';
-            
-            gyro.frequency = SENSOR_FREQ;
-            gyro.calibrate();
-            gyro.startTracking(function(o) {
-                con.sendMeasurements(o);
-                
-                // Debug
-                var e = document.getElementById('output');
-                e.innerHTML = "<p> x = " + o.x + "</p>" +
-                                    "<p> y = " + o.y + "</p>" +
-                                    "<p> z = " + o.z + "</p>" +
-                                    "<p> alpha = " + o.alpha + "</p>" +
-                                    "<p> beta = " + o.beta + "</p>" +
-                                    "<p> gamma = " + o.gamma + "</p>";
-            });
-        };
-        
-        con.connect();
-        
-        if(TIMEOUT != null)
-        {
-            setTimeout(function () 
-            {
-                LABEL.innerHTML = 'Timeout!';
+    <section id="info" data-magellan-target="info" class="fullscreen">
+      <div class="row">
+        <div class="medium-6 columns info-pic">
+          <img src="info-1.jpg" />
+        </div>
+        <div class="medium-6 columns">
+          <div class="top">
+            <h3>Motivation</h3>
+            <h2>Virtual Reality immersion and throw detection</h2>
+            <p>We wanted to create a VR experience centered around a throwing motion. Immersion and game logic should be used to make the game as fun as possible</p>
+          </div>
+          <div class="row">
+            <div class="large-6 columns">
+              <h3>Goal</h3>
+              <p>Realistic throwing experience (including the logic that detects the object release moment). </p>
+            </div>
+            <div class="large-6 columns">
+              <h3>Learning objectives</h3>
+              <p>Using appropriate hardware and technologies. Graphics that immerse the player in the game.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="development" data-magellan-target="development" class="fullscreen">
+      <div class="row">
+        <div class="large-5 columns">
+          <h3>Challenges</h3>
+          <h2>Throw detection is not a trivial task.</h2>
+          <p>Other challenges we have faced:</p>
+          <ul>
+            <li>Motion sensing in environments with interference from other people</li>
+            <li>Depth perception</li>
+            <li>Developing a game that is fun to play but doable in a tight timeframe</li>
+            <li>Immersion</li>
+          </ul>
+          <p class="ff">Photo from <a href="https://forskarfredag.se/">ForskarFredag</a> where the first public demo was presented<br />
+          Credit: Adrià Cruz</p>
+        </div>
+      </div>
+    </section>
+    <section id="method" data-magellan-target="method" class="fullscreen">
+      <div class="row heading">
+        <div class="large-6 large-centered columns text-center">
+          <h3>Method</h3>
+          <h2>We combine several techniques to achieve an immersive experience</h2>
+        </div>
+      </div>
+      <div class="row">
+        <div class="large-4 columns">
+          <div class="imgframe"><img src="kinect.jpg" /></div>
+          <p><b>Body tracking.</b> Microsoft Kinect is used for motion sensing input</p>
+        </div>
+        <div class="large-4 columns">
+          <div class="imgframe"><img src="oculus.jpg" /></div>
+          <p><b>VR Head Mounted Display.</b> The game is displayed with Oculus Rift</p>
+        </div>
+        <div class="large-4 columns">
+          <div class="imgframe"><img src="unity.png" /></div>
+          <p><b>Game Engine.</b> Unity 3D and C# provide game logic and functionality</p>
+        </div>
+      </div>
+    </section>
+    <section id="media" data-magellan-target="media" class="fullscreen">
+      <div class="row">
+        <div class="large-6 columns front-slider">
+          <div class="orbit" role="region" aria-label="Featured Project Photos" data-orbit>
+            <ul class="orbit-container">
+              <button class="orbit-previous"><span class="show-for-sr">Previous Slide</span>&#9664;&#xFE0E;</button>
+              <button class="orbit-next"><span class="show-for-sr">Next Slide</span>&#9654;&#xFE0E;</button>
+              <li class="is-active orbit-slide">
+                <img class="orbit-image" src="front-slider/slider1.jpg" alt="">
+                <figcaption class="orbit-caption">First renders of the scene.</figcaption>
+              </li>
+              <li class="orbit-slide">
+                <img class="orbit-image" src="front-slider/slider2.jpg" alt="">
+                <figcaption class="orbit-caption">Team picture (Credit: Mario Romero)</figcaption>
+              </li>
+              <li class="orbit-slide">
+                <img class="orbit-image" src="front-slider/slider3.jpg" alt="">
+                <figcaption class="orbit-caption">ForskarFredag (Credit: Mario Romero)</figcaption>
+              </li>
+              <li class="orbit-slide">
+                <img class="orbit-image" src="front-slider/slider4.png" alt="">
+                <figcaption class="orbit-caption">ForskarFredag comments</figcaption>
+              </li>
+            </ul>
+            <nav class="orbit-bullets">
+              <button class="is-active" data-slide="0"><span class="show-for-sr">First slide details.</span><span class="show-for-sr">Current Slide</span></button>
+              <button data-slide="1"><span class="show-for-sr">Second slide details.</span></button>
+              <button data-slide="2"><span class="show-for-sr">Third slide details.</span></button>
+              <button data-slide="3"><span class="show-for-sr">Fourth slide details.</span></button>
+            </nav>
+          </div>
+        </div>
+        <div class="large-6 columns">
+          <a href="https://www.facebook.com/VisualizationStudio/videos/1318991824830909/">Facebook post</a>
+          <iframe src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2FVisualizationStudio%2Fvideos%2F1318991824830909%2F&show_text=1&width=560" width="560" height="421" style="border:none;overflow:hidden;background:#fff;" scrolling="no" frameborder="0" allowTransparency="true"></iframe>
+        </div>
+      </div>
+    </section>
+    <section id="conclusions" data-magellan-target="conclusions" class="fullscreen">
+      <div class="row text-center heading">
+        <h3>Conclusions</h3>
+      </div>
+      <div class="row">
+        <div class="large-6 columns">
+          <h2>Playability is important</h2>
+          <p>In order to get feedback on the "important" stuff (important for this course),
+          the game has to be easy to play. It is a hurdle that has to be overcome for a sufficient level of immersion.
+          Then the players will be able to recognize valuable insights regarding graphics and interaction.</p>
+          <p>Since this project required 2 pivots (Pokemon VR, Breakout VR), the feedback we got from the public at ForskarFredag
+          was a bit vague.</p>
+          <h2>There are many ways to detect throwing</h2>
+          <p>A simple threshold for the speed of the hand is stable and easy to implement but may be too simple.
+            More advanced methods, e.g. recognizing preprogrammed throwing "archs" have to be adapted for different player sizes,
+            handedness and styles.</p>
+          <p>If one wants to use extra hardware it is advisable to skip the Kinect and go for VR with controllers instead (e.g. VIVE, Oculus Touch)</p>
+        </div>
+        <div class="large-6 columns">
+          <h2>Combining technologies is a hassle</h2>
+          <p>There might be problems on the software side (SDK/Drivers not working/not available) or on the hardware side (IR pollution, connectivity, faulty devices).
+            Solving them takes time, a very valuable asset of this course. A quick hack will work for a while but it might come back and bite you at a crucial moment.</p>
+          <h2>Game engines have pros/cons for "advanced" graphics</h2>
+          <p>Just like with sorting algorithms or numerical methods for differential equations, learning and programming basic graphics is easy but once you get to the advanced stuff,
+            it is easier to use well-written libraries that are robust and optimized. Game engines often have extensive libraries with good documentation and an active community.
+          </p>
+          <p>On the other hand, developing your own complex shader based on algorithms or pseudo-code from published papers is tricky if you don't have complete control of the rendering engine.
+            For some game engines, you have to use their API, leading to unnecessary or even impossible workarounds.</p>
+        </div>
+      </div>
+    </section>
+    <section id="footer">
+      <div class="team-wrap">
+        <div class="row">
+          <div class="large-12 columns">
+            <h3>Team</h3>
+          </div>
+        </div>
+        <div class="row">
+          <div class="large-3 columns">
+            <p>Patrik Fraj-Sladoljev<br />pfrajsladoljev@gmail.com<br/>Interaction - Getting the Kinnect to work (and trying other forms of interaction before deciding Kinect)</p>
+          </div>
+          <div class="large-3 columns">
+            <p>Mihael Marović<br />www.mihael@gmail.com<br />Graphics - Clouds, rain, experimenting with various shaders </p>
+          </div>
+          <div class="large-3 columns">
+            <p>Domagoj Penić<br />dpenic23@gmail.com<br />Interaction - Getting Oculus CV to work and integrating it with Kinect</p>
+          </div>
+          <div class="large-3 columns">
+            <p>Nico Palmroos<br />palmroos@kth.se<br />Graphics - Animation</p>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="large-2 columns">
+          <img src="kth.jpg" />
+        </div>
+        <div class="large-10 columns">
+          <div class="row">
+            <div class="large-6 columns">
+              <h3>The Course</h3>
+              <p>The project is part of the Advanced Graphics and Interaction Course
+                at KTH.</p>
+              <p>The course contact person is Mario Romero</p>
+            </div>
+            <div class="large-6 columns">
+              <h3>Links</h3>
+              <p><a href="https://www.kth.se/social/course/DH2413/page/agi16-comic-con-gamex/">Course Website with other projects</a><br />
+                <a href="https://www.facebook.com/VisualizationStudio/">KTH Visualization Studio on Facebook</a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-                con.disconnect();
-
-            }, TIMEOUT);
-        }
-        
-        // Touch gestures
-        var myElement = document.getElementById('back');
-        var output = document.getElementById('element');
-        var key = document.getElementById('key');
-        var mc = new Hammer(myElement);
-
-        var pinchTresh = 0.001;
-        var pinchActive = false;
-        
-        var isKeyVisible = false;
-        
-        var debugEvent = function(event) {
-            output.innerHTML = event.type + ' gesture detected.';
-            
-            console.log(event);
-        }
-        
-        var hideKey = function () {
-            $('#key').addClass( "invisible" );
-            
-            isKeyVisible = !isKeyVisible;
-            
-            if(ENABLE_VIBRATE)
-                navigator.vibrate(50);
-        }
-        
-        var showKey = function () {
-            $('#key').removeClass( "invisible" );
-            
-            isKeyVisible = !isKeyVisible;
-            
-            if(ENABLE_VIBRATE)
-                navigator.vibrate(50);
-        }
-        
-        var toggleKey = function () {
-            if(isKeyVisible)
-                hideKey();
-            else
-                showKey();
-        }
-        
-        var tapButton = function () {
-                     
-            if(!isKeyVisible) return;
-            
-            var elem = $( event.target );
-            
-//            switch(elem.attr('id')) {
-//                case 'btn1':
-//                    
-//                    break;
-//                case 'btn2':
-//                    
-//                    break;
-//                case 'btn3':
-//                    
-//                    break;
-//            }
-            
-            con.sendButton(elem.attr('id'));
-            
-            if(elem.attr('id') == 'btn1' || elem.attr('id') == 'btn2' || elem.attr('id') == 'btn3') {
-                
-                if(elem.hasClass('tap'))
-                    elem.removeClass('tap');
-                else
-                    elem.addClass('tap');
-            }
-        }
-
-        // Enable events
-        mc.get('pinch').set({enable: true});    
-
-        // Events   
-        mc.on("pinchin pinchout", function(event) {
-            output.innerHTML = event.type;
-            var velocity = (Math.abs(event.velocity) > pinchTresh) ? Math.abs(event.velocity)*100 : 0;
-            var dir = (event.type == "pinchin") ? 1 : -1;
-            con.setPinchStart(velocity*dir);
-
-        });
-
-        mc.on("pinchend", function(event) {
-            debugEvent(event);
-            con.setPinchEnd();
-        });
-
-        mc.on("tap", function(event) {
-            debugEvent(event);
-            
-            tapButton(event);
-        });
-
-        mc.on("doubletap", function(event) {
-            debugEvent(event);
-            gyro.calibrate();
-        });
-        
-        mc.on("press", function(event) {
-            debugEvent(event);
-            
-            toggleKey();
-        });
-        
-        mc.on("pressup", function(event) {
-            
-            debugEvent(event);
-        });
-        
-        mc.on("swipe", function(event) {
-            
-            debugEvent(event);
-        });
-    </script>
-</body>
+    <script src="js/vendor/jquery.js"></script>
+    <script src="js/vendor/what-input.js"></script>
+    <script src="js/vendor/foundation.js"></script>
+    <script src="js/app.js"></script>
+  </body>
 </html>
