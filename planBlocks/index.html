@@ -6,9 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PlanBLOCKS</title>
     <meta name="description" content="The village is under attack. It is your viking duty to save it">
-    <meta property="og:image" content="https://palmroos-kth.github.io/AGI16-web/front-slider/slider1.jpg">
+    <meta property="og:image" content="./front-slider/slider1.jpg">
     <link rel="stylesheet" href="css/foundation.css">
     <link rel="stylesheet" href="css/app.css">
+    <link rel="stylesheet" href="css/style.css">
     <link href="https://fonts.googleapis.com/css?family=Work+Sans:400,500" rel="stylesheet">
   </head>
   <body>
@@ -26,9 +27,9 @@
           </div>
         </div>
         <div class="wrap">
-          <div class="branding medium-4 columns">
-            <h1>Plan BLOCKS</h1>
-            <p>The village is under attack. It is your viking duty to save it</p>
+          <div class="branding medium-4 columns"> 
+           <div class="imgframe" id="logo-image"><img src="logo.png" /></div>
+            <p id="logo-text">Your village is under attack!</p>
             <div data-magellan data-bar-offset="-25">
             <a href="#info" class="button">Read More</a>
             </div>
@@ -46,18 +47,19 @@
         </div>
         <div class="medium-6 columns">
           <div class="top">
-            <h3>Motivation</h3>
-            <h2>Virtual Reality immersion and throw detection</h2>
-            <p>We wanted to create a VR experience centered around a throwing motion. Immersion and game logic should be used to make the game as fun as possible</p>
+            <div id="section-title">Motivation</div>
+            <p>The goal was to create a immersive VR experience centered around the throwing motion (gesture) with a motivation to create a robust yet useful throwing detection algorithm with a fun gameplay to keep the player motivated. We also wanted to use minimal hardware and maximize immersion by omitting any kind of hand held controllers and keeping the amount of wires around the player minimal.
+            </p>
           </div>
           <div class="row">
             <div class="large-6 columns">
-              <h3>Goal</h3>
-              <p>Realistic throwing experience (including the logic that detects the object release moment). </p>
+              <div id="section-title">Goal</div>
+              <p>Robust and useful throwing experience with fun gameplay.</p>
             </div>
             <div class="large-6 columns">
-              <h3>Learning objectives</h3>
-              <p>Using appropriate hardware and technologies. Graphics that immerse the player in the game.</p>
+              <div id="section-title">Learning objectives</div>
+              <p>Use appropriate hardware and technologies.</p>
+              <p>Make use of advanced graphics for best game experience.</p>
             </div>
           </div>
         </div>
@@ -66,14 +68,19 @@
     <section id="development" data-magellan-target="development" class="fullscreen">
       <div class="row">
         <div class="large-5 columns">
-          <h3>Challenges</h3>
+          <div id="section-title">Challenges</div>
           <h2>Throw detection is not a trivial task.</h2>
-          <p>Other challenges we have faced:</p>
           <ul>
-            <li>Motion sensing in environments with interference from other people</li>
-            <li>Depth perception</li>
-            <li>Developing a game that is fun to play but doable in a tight timeframe</li>
-            <li>Immersion</li>
+          	<li>More complicated detection methods have to be fine tuned to fit different players.</li>
+          	<li>Simplistic methods may be unrealistic in a VR environment and reduce immersion and fun.</li>
+          </ul>          
+          <h3>Other challenges:</h3>
+          <ul>
+            <li>Real world interferance.</li>
+			<li>Depth perception.</li>
+			<li>Tight timeframe and unknown technologies</li>
+			<li>Making the game challenging yet fun</li>
+			<li>Reducing player fatigue due to extensive motion.</li>
           </ul>
           <p class="ff">Photo from <a href="https://forskarfredag.se/">ForskarFredag</a> where the first public demo was presented<br />
           Credit: Adrià Cruz</p>
@@ -83,22 +90,22 @@
     <section id="method" data-magellan-target="method" class="fullscreen">
       <div class="row heading">
         <div class="large-6 large-centered columns text-center">
-          <h3>Method</h3>
-          <h2>We combine several techniques to achieve an immersive experience</h2>
+          <div id="section-title">Methods</div>
+          <h2>We combine several techniques to 	achieve an immersive experience</h2>
         </div>
       </div>
       <div class="row">
         <div class="large-4 columns">
           <div class="imgframe"><img src="kinect.jpg" /></div>
-          <p><b>Body tracking.</b> Microsoft Kinect is used for motion sensing input</p>
+          <p id="centered-text"><b>Microsoft Kinect</b> <br>is used for body tracking.</p>
         </div>
         <div class="large-4 columns">
           <div class="imgframe"><img src="oculus.jpg" /></div>
-          <p><b>VR Head Mounted Display.</b> The game is displayed with Oculus Rift</p>
+          <p id="centered-text"><b>Oculus Rift</b> <br>is used as a head mounted display for best VR experience.</p>
         </div>
         <div class="large-4 columns">
           <div class="imgframe"><img src="unity.png" /></div>
-          <p><b>Game Engine.</b> Unity 3D and C# provide game logic and functionality</p>
+          <p id="centered-text"><b>Unity 3D with C#</b><br>is used as a game engine to create the game logic and functionality.</p>
         </div>
       </div>
     </section>
@@ -122,15 +129,40 @@
                 <figcaption class="orbit-caption">ForskarFredag (Credit: Mario Romero)</figcaption>
               </li>
               <li class="orbit-slide">
-                <img class="orbit-image" src="front-slider/slider4.png" alt="">
-                <figcaption class="orbit-caption">ForskarFredag comments</figcaption>
+                <img class="orbit-image" src="images/comicon1.jpg" alt="">
+                <figcaption class="orbit-caption">Comicon 2016</figcaption>
+              </li>
+              <li class="orbit-slide">
+                <img class="orbit-image" src="images/comicon2.jpg" alt="">
+                <figcaption class="orbit-caption">Comicon 2016</figcaption>
+              </li>
+              <li class="orbit-slide">
+                <img class="orbit-image" src="images/comicon3.jpg" alt="">
+                <figcaption class="orbit-caption">Comicon 2016</figcaption>
+              </li>
+              <li class="orbit-slide">
+                <img class="orbit-image" src="images/comicon4.jpg" alt="">
+                <figcaption class="orbit-caption">Comicon 2016</figcaption>
+              </li>
+              <li class="orbit-slide">
+                <img class="orbit-image" src="images/comicon5.jpg" alt="">
+                <figcaption class="orbit-caption">Comicon 2016</figcaption>
+              </li>
+              <li class="orbit-slide">
+                <img class="orbit-image" src="images/comicon6.jpg" alt="">
+                <figcaption class="orbit-caption">Comicon 2016</figcaption>
               </li>
             </ul>
             <nav class="orbit-bullets">
-              <button class="is-active" data-slide="0"><span class="show-for-sr">First slide details.</span><span class="show-for-sr">Current Slide</span></button>
-              <button data-slide="1"><span class="show-for-sr">Second slide details.</span></button>
-              <button data-slide="2"><span class="show-for-sr">Third slide details.</span></button>
-              <button data-slide="3"><span class="show-for-sr">Fourth slide details.</span></button>
+              <button class="is-active" data-slide="0"><span class="show-for-sr"></span><span class="show-for-sr">Current Slide</span></button>
+              	<button data-slide="1"><span class="show-for-sr"></span></button>
+              	<button data-slide="2"><span class="show-for-sr"></span></button>
+              	<button data-slide="3"><span class="show-for-sr"></span></button>
+				<button data-slide="4"><span class="show-for-sr"></span></button>
+				<button data-slide="5"><span class="show-for-sr"></span></button>
+              	<button data-slide="6"><span class="show-for-sr"></span></button>
+              	<button data-slide="7"><span class="show-for-sr"></span></button>
+				<button data-slide="8"><span class="show-for-sr"></span></button>
             </nav>
           </div>
         </div>
@@ -142,7 +174,7 @@
     </section>
     <section id="conclusions" data-magellan-target="conclusions" class="fullscreen">
       <div class="row text-center heading">
-        <h3>Conclusions</h3>
+        <div id="section-title">conclusions</div>
       </div>
       <div class="row">
         <div class="large-6 columns">
@@ -180,16 +212,24 @@
         </div>
         <div class="row">
           <div class="large-3 columns">
-            <p>Patrik Fraj-Sladoljev<br />pfrajsladoljev@gmail.com<br/>Interaction - Getting the Kinnect to work (and trying other forms of interaction before deciding Kinect)</p>
+            <p>Patrik Fraj-Sladoljev
+            <br/>pfrajsladoljev@gmail.com</p>
+            <p>Interaction<br/>Sensor integration<br/>Throw detection</p>
           </div>
           <div class="large-3 columns">
-            <p>Mihael Marović<br />www.mihael@gmail.com<br />Graphics - Clouds, rain, experimenting with various shaders </p>
+            <p>Mihael Marović
+            <br/>www.mihael@gmail.com</p>
+            <p>Graphics<br/>Clouds, rain<br/>Shaders experimentation</p>
           </div>
           <div class="large-3 columns">
-            <p>Domagoj Penić<br />dpenic23@gmail.com<br />Interaction - Getting Oculus CV to work and integrating it with Kinect</p>
+            <p>Domagoj Penić
+            <br/>dpenic23@gmail.com</p>
+            <p>Interaction<br/>Oculus integration<br/>Throw detection</p>
           </div>
           <div class="large-3 columns">
-            <p>Nico Palmroos<br />palmroos@kth.se<br />Graphics - Animation</p>
+            <p>Nico Palmroos
+            <br/>palmroos@kth.se</p>
+            <p>Graphics <br />Animation<br/>Particle systems</p>
           </div>
         </div>
       </div>
