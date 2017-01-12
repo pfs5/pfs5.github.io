@@ -523,6 +523,9 @@ fieldset[disabled] .btn-success.active {
 }
 
 #portfolio-video {
-  padding-top: 20px;
   padding-bottom: 20px;
+}
+
+.img-slider {
+  height: 95%;
 }
