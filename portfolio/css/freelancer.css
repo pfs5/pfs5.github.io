@@ -529,3 +529,7 @@ fieldset[disabled] .btn-success.active {
 .img-slider {
   height: 95%;
 }
+
+#contact-form {
+  width: 100%;
+}
