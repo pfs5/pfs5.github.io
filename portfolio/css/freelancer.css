@@ -537,3 +537,9 @@ fieldset[disabled] .btn-success.active {
 .full-page-layout {
   height: 100vh;
 }
+
+.front-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
