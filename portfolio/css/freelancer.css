@@ -533,3 +533,7 @@ fieldset[disabled] .btn-success.active {
 #contact-form {
   width: 100%;
 }
+
+.full-page-layout {
+  height: 100vh;
+}
