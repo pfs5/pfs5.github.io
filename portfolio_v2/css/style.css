@@ -118,6 +118,11 @@ html, body {
 	padding: 5px 5px 5px 5px;
 }
 
+#forest-container {
+	padding: 10px 0px 10px 0px;
+	text-align: center;
+}
+
 #forest-container:hover {
 	background-color: var(--medium-blue);
 	opacity: 0.2;
