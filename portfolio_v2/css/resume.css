@@ -190,3 +190,9 @@ a:hover, a:focus, a:active {
 .empty-space {
   padding-top: 2rem;
 }
+
+.project-description {
+  width: 41.5%;
+  text-align: justify;
+  text-justify: inter-word;
+}
