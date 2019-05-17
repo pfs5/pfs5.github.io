@@ -1,0 +1,44 @@
+<head>
+    <title>Waiting for Godot ...</title>
+    <style>
+        #title {
+            font-size: 40pt;
+        }
+        .link {
+            font-weight: bold;
+            text-decoration: none;
+            color:blue
+        }
+        .link:visited {
+            color:blue
+        }
+    </style>
+
+    <script>
+        var number_of_waits = 0;
+        var interval = setInterval(function(){
+            number_of_waits = (number_of_waits + 1) % 4;
+            var title = "Waiting for Godot ";
+            var i;
+            for (i = 0; i < number_of_waits; i++) {
+                title += ".";
+            }
+
+            document.title = title;
+            document.getElementById("title").innerHTML = title;
+        }, 1000);
+    </script>
+</head>
+
+<body>
+    <div id="title">Waiting for Godot ...</div>
+    <h2>A super responsive dynamic modern wordpress website.</h3>
+    <h3>Browse some extraordinary games while you wait:</h3>
+
+    <ul>
+        <li><a class="link" href="./shooter/FakeVader.html">Shooter thing that shoots shooties</a></li>
+        <li><a class="link" href="./sword-guy/sword-guy.html">Sword guy with a sword</a></li>
+    </ul>
+</body>
+
+<footer>1995 Copyright (c) Modern web designs inc. All rights reserved.</footer>
