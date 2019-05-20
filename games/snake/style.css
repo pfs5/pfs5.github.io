@@ -1,0 +1,31 @@
+:root
+{
+    --main-bg-color: #222222;
+    --main-text-color: #dddddd;
+}
+
+body
+{
+    font-family: 'Share Tech Mono', monospace;
+}
+
+#score
+{
+    background-color: var(--main-bg-color);
+    color: var(--main-text-color);
+    
+    padding-left: 10%;
+    padding-right: 10%;
+    padding-top: 2%;
+    padding-bottom: 2%;
+}
+
+#game
+{
+    background-color: var(--main-bg-color);
+    color: var(--main-text-color);
+    
+    padding-left: 10%;
+    padding-right: 10%;
+    padding-bottom: 2%;
+}
