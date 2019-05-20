@@ -1,12 +1,21 @@
 :root
 {
-    --main-bg-color: #222222;
+    --main-bg-color: #333333;
     --main-text-color: #dddddd;
 }
 
 body
 {
     font-family: 'Share Tech Mono', monospace;
+}
+
+#container
+{
+    background-color: var(--main-bg-color);
+    color: var(--main-text-color);
+    
+    height: 100%;
+    width: 100%;
 }
 
 #score
@@ -25,7 +34,8 @@ body
     background-color: var(--main-bg-color);
     color: var(--main-text-color);
     
-    padding-left: 10%;
-    padding-right: 10%;
     padding-bottom: 2%;
+    
+    align-content: center;
+    text-align: center;
 }

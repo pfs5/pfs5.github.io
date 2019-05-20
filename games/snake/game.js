@@ -8,7 +8,7 @@
  */ 
 
 // Globals
-var screen_width = 50;
+var screen_width = 25;
 var screen_height = 25;
 var screen_buffer = "";
 var screen_matrix = null;
@@ -18,7 +18,13 @@ var snake_len = 3;
 var max_score_per_diff = [
     1,
     2,
-    5
+    5,
+    8,
+    10,
+    13,
+    15,
+    20,
+    30
 ]
 
 var speed_per_diff = [
@@ -32,7 +38,7 @@ var game_body_div = null;
 var game_score_div = null;
 
 // Locals
-var pos_x = 25;
+var pos_x = 15;
 var pos_y = 10;
 var snake_positions = [];
 
@@ -42,6 +48,8 @@ var fruit_y = 0;
 
 var score = 0;
 var diff_level = 0;
+
+var game_over = false;
 
 // up down left right
 var move_dir = "up"
@@ -97,6 +105,18 @@ function key_down(event)
     refresh_screen();
 }
 
+function restart_game()
+{
+    score = 0;
+    diff_level = 0;
+
+    init_screen();
+    init_snake();
+    spawn_fruit();
+    refresh_screen();
+    update_score();
+}
+
 function init_screen()
 {
     screen_matrix = [];
@@ -150,7 +170,7 @@ function flush_screen_buffer()
         var line = "";
         for (x = 0; x < screen_width; x++)
         {
-            line += screen_matrix[y][x];
+            line += screen_matrix[y][x] + " ";
         }
         line += "<br>";
         screen_buffer += line;
@@ -186,6 +206,7 @@ function refresh_screen()
 function game_loop()
 {
     move_snake();
+    check_collision();
     check_fruit_collected();
     refresh_screen();
 }
@@ -197,24 +218,42 @@ function move_snake()
     {
         case "up":
         {
-            pos_y = Math.max(1, pos_y - 1);
+            pos_y = Math.max(0, pos_y - 1);
             break;
         }
         case "down":
         {
-            pos_y = Math.min(screen_height - 2, pos_y + 1);
+            pos_y = Math.min(screen_height - 1, pos_y + 1);
             break;
         }
         case "left":
         {
-            pos_x = Math.max(1, pos_x - 1);
+            pos_x = Math.max(0, pos_x - 1);
             break;
         }
         case "right":
         {
-            pos_x = Math.min(screen_width - 2, pos_x + 1);
+            pos_x = Math.min(screen_width - 1, pos_x + 1);
             break;
         }
+    }
+
+    // Wrap snake around edges
+    if (pos_x <= 0)
+    {
+        pos_x = screen_width - 2;
+    }
+    if (pos_x >= screen_width - 1)
+    {
+        pos_x = 1;
+    }
+    if (pos_y <= 0)
+    {
+        pos_y = screen_height - 2;
+    }
+    if (pos_y >= screen_height - 1)
+    {
+        pos_y = 1;
     }
 
     // Move body
@@ -230,7 +269,8 @@ function move_snake()
 function update_score()
 {
     game_score_div.innerHTML = "Score: " + score + "<br>" + 
-        "Level: " + (diff_level + 1);
+        "Level: " + (diff_level + 1) + "<br>" +
+        "Debug: " + game_over;
 }
 
 function spawn_fruit()
@@ -270,6 +310,7 @@ function check_fruit_collected()
             if (score >= max_score_per_diff[diff_level])
             {
                 diff_level++;
+                add_snake_segment();
             }
         }
 
@@ -278,16 +319,41 @@ function check_fruit_collected()
     }
 }
 
+function check_collision()
+{
+    for (var i = 0; i < snake_positions.length - 1; i++)
+    {
+        for (var j = i + 1; j < snake_positions.length - 1; j++)
+        {
+            segment_x_1 = snake_positions[i][0];
+            segment_y_1 = snake_positions[i][1];
+            segment_x_2 = snake_positions[j][0];
+            segment_y_2 = snake_positions[j][1];
+        
+            if (segment_x_1 == segment_x_2 &&
+                segment_y_1 == segment_y_2)
+            {
+                game_over = true;
+                break;
+            }
+        }
+    }
+}
+
+function add_snake_segment()
+{
+    var seg_x = snake_positions[snake_positions.length - 1][0];
+    var seg_y = snake_positions[snake_positions.length - 1][1];
+    
+    snake_positions.push([seg_x, seg_y]);
+}
+
 function game()
 {
     game_body_div = document.getElementById("game");
     game_score_div = document.getElementById("score");
 
-    init_screen();
-    init_snake();
-    spawn_fruit();
-    refresh_screen();
-    update_score();
+    restart_game();
 
     setInterval(game_loop, game_period * 1000);
 }
