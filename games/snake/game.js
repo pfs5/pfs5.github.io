@@ -10,6 +10,8 @@
 // Globals
 var screen_width = 25;
 var screen_height = 25;
+var game_over_period = 0.05;
+
 var screen_buffer = "";
 var screen_matrix = null;
 var game_period = 0.2;  // updates per sec
@@ -36,8 +38,11 @@ var speed_per_diff = [
 // Refs
 var game_body_div = null;
 var game_score_div = null;
+var game_over_div = null;
 
 // Locals
+var game_playing = true;
+
 var pos_x = 15;
 var pos_y = 10;
 var snake_positions = [];
@@ -50,6 +55,7 @@ var score = 0;
 var diff_level = 0;
 
 var game_over = false;
+var game_over_pos = 5;
 
 // up down left right
 var move_dir = "up"
@@ -61,10 +67,16 @@ function random_from_range(min, max)
 
 function key_down(event)
 {
+    if (game_over)
+    {
+        restart_game();
+        return;
+    }
+
     var head_x = pos_x;
     var head_y = pos_y;
-    var neck_x = snake_positions[snake_positions.length - 2][0];
-    var neck_y = snake_positions[snake_positions.length - 2][1];
+    var neck_x = snake_positions[1][0];
+    var neck_y = snake_positions[1][1];
 
     // Move left
     if (event.key == "ArrowLeft" || event.key == "a")
@@ -109,6 +121,12 @@ function restart_game()
 {
     score = 0;
     diff_level = 0;
+    move_dir = "up";
+    game_over = false;
+    game_over_pos = 5;
+    game_playing = true;
+
+    game_over_div.style.visibility = 'hidden';
 
     init_screen();
     init_snake();
@@ -135,9 +153,10 @@ function init_screen()
 function init_snake()
 {
     var i;
-    for (i = 1; i <= snake_len; i++)
+    snake_positions = [];
+    for (i = 0; i < snake_len; i++)
     {
-        snake_positions.push([pos_x, pos_y + snake_len - i]);
+        snake_positions.push([pos_x, pos_y + i]);
     }
 }
 
@@ -205,10 +224,32 @@ function refresh_screen()
 
 function game_loop()
 {
+    if (!game_playing)
+    {
+        return;
+    }
+
     move_snake();
     check_collision();
     check_fruit_collected();
     refresh_screen();
+
+    if (game_over)
+    {
+        on_game_over();
+    }
+}
+
+function game_over_loop()
+{
+    if (!game_over)
+    {
+        return;
+    }
+
+    game_over_pos = (game_over_pos + 2) % 85 + 5;
+
+    game_over_div.style.marginLeft = game_over_pos + "%";
 }
 
 function move_snake()
@@ -257,13 +298,13 @@ function move_snake()
     }
 
     // Move body
-    for (var i = 0; i < snake_positions.length - 1; i++)
+    for (var i = snake_positions.length - 1; i > 0 ; i--)
     {
-        snake_positions[i][0] = snake_positions[i + 1][0];
-        snake_positions[i][1] = snake_positions[i + 1][1];
+        snake_positions[i][0] = snake_positions[i - 1][0];
+        snake_positions[i][1] = snake_positions[i - 1][1];
     }
-    snake_positions[snake_positions.length - 1][0] = pos_x;
-    snake_positions[snake_positions.length - 1][1] = pos_y;
+    snake_positions[0][0] = pos_x;
+    snake_positions[0][1] = pos_y;
 }
 
 function update_score()
@@ -321,9 +362,9 @@ function check_fruit_collected()
 
 function check_collision()
 {
-    for (var i = 0; i < snake_positions.length - 1; i++)
+    for (var i = 0; i < snake_positions.length; i++)
     {
-        for (var j = i + 1; j < snake_positions.length - 1; j++)
+        for (var j = i + 1; j < snake_positions.length; j++)
         {
             segment_x_1 = snake_positions[i][0];
             segment_y_1 = snake_positions[i][1];
@@ -334,6 +375,7 @@ function check_collision()
                 segment_y_1 == segment_y_2)
             {
                 game_over = true;
+                update_score();
                 break;
             }
         }
@@ -348,14 +390,25 @@ function add_snake_segment()
     snake_positions.push([seg_x, seg_y]);
 }
 
+function on_game_over()
+{
+    game_playing = false;
+
+    // Print game over
+    game_over_div.style.visibility = 'visible';
+    game_over_div.innerHTML = "Game Over";
+}
+
 function game()
 {
     game_body_div = document.getElementById("game");
     game_score_div = document.getElementById("score");
+    game_over_div = document.getElementById("game-over");
 
     restart_game();
 
     setInterval(game_loop, game_period * 1000);
+    setInterval(game_over_loop, game_over_period * 1000);
 }
 
 window.onload = game;
