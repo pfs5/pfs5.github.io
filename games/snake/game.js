@@ -7,10 +7,14 @@
  * -------------------------------------------
  */ 
 
+// Parameters
+const screen_width = 25;
+const screen_height = 25;
+const game_over_period = 0.05;
+const empty_char = "&nbsp;";
+
 // Globals
-var screen_width = 25;
-var screen_height = 25;
-var game_over_period = 0.05;
+var game_loop_handle = null;
 
 var screen_buffer = "";
 var screen_matrix = null;
@@ -21,18 +25,36 @@ var max_score_per_diff = [
     1,
     2,
     5,
+
     8,
     10,
     13,
+
     15,
     20,
-    30
+    30,
+
+    50,
+    100,
+    150
 ]
 
 var speed_per_diff = [
     0.2,
+    0.2,
+    0.2,
+
     0.1,
-    0.05
+    0.1,
+    0.1,
+
+    0.05,
+    0.05,
+    0.05,
+
+    0.04,
+    0.03,
+    0.02
 ]
 
 // Refs
@@ -144,7 +166,7 @@ function init_screen()
         var line = [];
         for (x = 0; x < screen_width; x++)
         {
-            line.push('.');
+            line.push(empty_char);
         }
         screen_matrix.push(line);
     }   
@@ -174,7 +196,7 @@ function clear_screen()
             }
             else
             {
-                screen_matrix[y][x] = '.';
+                screen_matrix[y][x] = empty_char;
             }
         }
     }   
@@ -310,8 +332,7 @@ function move_snake()
 function update_score()
 {
     game_score_div.innerHTML = "Score: " + score + "<br>" + 
-        "Level: " + (diff_level + 1) + "<br>" +
-        "Debug: " + game_over;
+        "Level: " + (diff_level + 1) + "<br>";
 }
 
 function spawn_fruit()
@@ -345,13 +366,12 @@ function check_fruit_collected()
 
     if (fruit_x == pos_x && fruit_y == pos_y)
     {
-        score++;
+        on_fruit_collected();
         if (diff_level < max_score_per_diff.length)
         {
             if (score >= max_score_per_diff[diff_level])
             {
-                diff_level++;
-                add_snake_segment();
+                increase_diff_level();
             }
         }
 
@@ -390,6 +410,28 @@ function add_snake_segment()
     snake_positions.push([seg_x, seg_y]);
 }
 
+function increase_diff_level()
+{
+    diff_level++;
+
+    // Update speed
+    if (diff_level < speed_per_diff.length)
+    {
+        clearInterval(game_loop_handle);
+        game_period = speed_per_diff[diff_level];
+        game_loop_handle = setInterval(game_loop, game_period * 1000);
+    }
+}
+
+function on_fruit_collected()
+{
+    score++;
+    if (score % 3 == 0)
+    {
+        add_snake_segment();
+    }
+}
+
 function on_game_over()
 {
     game_playing = false;
@@ -407,7 +449,7 @@ function game()
 
     restart_game();
 
-    setInterval(game_loop, game_period * 1000);
+    game_loop_handle = setInterval(game_loop, game_period * 1000);
     setInterval(game_over_loop, game_over_period * 1000);
 }
 
