@@ -143,10 +143,14 @@ function restart_game()
 {
     score = 0;
     diff_level = 0;
+    game_period = speed_per_diff.length > 0 ? speed_per_diff[0] : 0.5;
     move_dir = "up";
     game_over = false;
     game_over_pos = 5;
     game_playing = true;
+
+    clearInterval(game_loop_handle);
+    game_loop_handle = setInterval(game_loop, game_period * 1000);
 
     game_over_div.style.visibility = 'hidden';
 
