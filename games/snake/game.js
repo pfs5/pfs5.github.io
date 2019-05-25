@@ -40,7 +40,7 @@ var max_score_per_diff = [
 ]
 
 var speed_per_diff = [
-    0.2,
+    0.5,
     0.2,
     0.2,
 
