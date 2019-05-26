@@ -6,6 +6,7 @@
  * 
  * -------------------------------------------
  */ 
+// -----------------------------------------------------------------------------
 
 // Parameters
 const screen_width = 25;
@@ -20,6 +21,7 @@ var screen_buffer = "";
 var screen_matrix = null;
 var game_period = 0.2;  // updates per sec
 var snake_len = 3;
+var highscore = 0;
 
 var max_score_per_diff = [
     1,
@@ -82,11 +84,12 @@ var game_over_pos = 5;
 // up down left right
 var move_dir = "up"
 
+// -----------------------------------------------------------------------------
 function random_from_range(min, max)
 {
     return Math.floor(Math.random() * (max - min + 1) + min);
 }
-
+// -----------------------------------------------------------------------------
 function key_down(event)
 {
     if (game_over)
@@ -138,7 +141,32 @@ function key_down(event)
 
     refresh_screen();
 }
-
+// -----------------------------------------------------------------------------
+function load_highscore()
+{
+    var rawFile = new XMLHttpRequest();
+    rawFile.open("GET", "highscore.dat", true);
+    rawFile.onreadystatechange = function()
+    {
+        if (rawFile.status == 200 && rawFile.readyState == 4)
+        {
+            var xml = rawFile.responseXML;
+            var nodes = xml.getElementsByTagName("value");
+            if (nodes.length > 0)
+            {
+                var highscoreVal = nodes[0].textContent;
+                var highscoreInt = parseInt(highscoreVal);
+                if (highscoreInt != NaN)
+                {
+                    highscore = highscoreInt;
+                    update_score();
+                }
+            }
+        }
+    }
+    rawFile.send();
+}
+// -----------------------------------------------------------------------------
 function restart_game()
 {
     score = 0;
@@ -160,7 +188,7 @@ function restart_game()
     refresh_screen();
     update_score();
 }
-
+// -----------------------------------------------------------------------------
 function init_screen()
 {
     screen_matrix = [];
@@ -175,7 +203,7 @@ function init_screen()
         screen_matrix.push(line);
     }   
 }
-
+// -----------------------------------------------------------------------------
 function init_snake()
 {
     var i;
@@ -185,7 +213,7 @@ function init_snake()
         snake_positions.push([pos_x, pos_y + i]);
     }
 }
-
+// -----------------------------------------------------------------------------
 function clear_screen()
 {
     var x, y;
@@ -205,7 +233,7 @@ function clear_screen()
         }
     }   
 }
-
+// -----------------------------------------------------------------------------
 function flush_screen_buffer()
 {
     var x, y;
@@ -223,15 +251,20 @@ function flush_screen_buffer()
     
     game_body_div.innerHTML = screen_buffer;
 }
-
+// -----------------------------------------------------------------------------
 function draw_snake()
 {
-    for (var i = 0; i < snake_positions.length; i++)
+    if(snake_positions.length > 0)
+    {
+        screen_matrix[snake_positions[0][1]][snake_positions[0][0]] = 'e';
+    }
+
+    for (var i = 1; i < snake_positions.length; i++)
     {
         screen_matrix[snake_positions[i][1]][snake_positions[i][0]] = 'o';
     }
 }
-
+// -----------------------------------------------------------------------------
 function draw_fruit()
 {
     if (fruit_valid)
@@ -239,7 +272,7 @@ function draw_fruit()
         screen_matrix[fruit_y][fruit_x] = 'Q';
     }
 }
-
+// -----------------------------------------------------------------------------
 function refresh_screen()
 {
     clear_screen();
@@ -247,7 +280,7 @@ function refresh_screen()
     draw_fruit();
     flush_screen_buffer();
 }
-
+// -----------------------------------------------------------------------------
 function game_loop()
 {
     if (!game_playing)
@@ -265,7 +298,7 @@ function game_loop()
         on_game_over();
     }
 }
-
+// -----------------------------------------------------------------------------
 function game_over_loop()
 {
     if (!game_over)
@@ -277,7 +310,7 @@ function game_over_loop()
 
     game_over_div.style.marginLeft = game_over_pos + "%";
 }
-
+// -----------------------------------------------------------------------------
 function move_snake()
 {
     // Move head
@@ -332,13 +365,14 @@ function move_snake()
     snake_positions[0][0] = pos_x;
     snake_positions[0][1] = pos_y;
 }
-
+// -----------------------------------------------------------------------------
 function update_score()
 {
     game_score_div.innerHTML = "Score: " + score + "<br>" + 
-        "Level: " + (diff_level + 1) + "<br>";
+        "Level: " + (diff_level + 1) + "<br>" +
+        "Highscore: " + highscore;
 }
-
+// -----------------------------------------------------------------------------
 function spawn_fruit()
 {
     var fruit_spawned = false;
@@ -360,7 +394,7 @@ function spawn_fruit()
 
     fruit_valid = true;
 }
-
+// -----------------------------------------------------------------------------
 function check_fruit_collected()
 {
     if (!fruit_valid)
@@ -383,7 +417,7 @@ function check_fruit_collected()
         spawn_fruit();
     }
 }
-
+// -----------------------------------------------------------------------------
 function check_collision()
 {
     for (var i = 0; i < snake_positions.length; i++)
@@ -405,7 +439,7 @@ function check_collision()
         }
     }
 }
-
+// -----------------------------------------------------------------------------
 function add_snake_segment()
 {
     var seg_x = snake_positions[snake_positions.length - 1][0];
@@ -413,7 +447,7 @@ function add_snake_segment()
     
     snake_positions.push([seg_x, seg_y]);
 }
-
+// -----------------------------------------------------------------------------
 function increase_diff_level()
 {
     diff_level++;
@@ -426,7 +460,7 @@ function increase_diff_level()
         game_loop_handle = setInterval(game_loop, game_period * 1000);
     }
 }
-
+// -----------------------------------------------------------------------------
 function on_fruit_collected()
 {
     score++;
@@ -435,7 +469,7 @@ function on_fruit_collected()
         add_snake_segment();
     }
 }
-
+// -----------------------------------------------------------------------------
 function on_game_over()
 {
     game_playing = false;
@@ -444,7 +478,7 @@ function on_game_over()
     game_over_div.style.visibility = 'visible';
     game_over_div.innerHTML = "Game Over";
 }
-
+// -----------------------------------------------------------------------------
 function game()
 {
     game_body_div = document.getElementById("game");
@@ -453,9 +487,11 @@ function game()
 
     restart_game();
 
-    game_loop_handle = setInterval(game_loop, game_period * 1000);
+    load_highscore();
+
     setInterval(game_over_loop, game_over_period * 1000);
 }
-
+// -----------------------------------------------------------------------------
 window.onload = game;
 document.addEventListener('keydown', key_down);
+// -----------------------------------------------------------------------------
